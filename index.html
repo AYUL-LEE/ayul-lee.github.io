@@ -1,0 +1,1681 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>영성을 탐구하는 개발자</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        /* 서비스 중 상태 스타일 */
+.project-status.live {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    animation: pulse 2s infinite;
+}
+
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 30px;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            text-align: center;
+            margin: 80px 0 40px 0;
+            color: white;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .section:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .section h3 {
+            color: #4a4a4a;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section h4 {
+            color: #5a5a5a;
+            margin: 20px 0 10px 0;
+            font-size: 1.3rem;
+        }
+
+        .icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50%;
+            font-size: 1.2rem;
+        }
+
+        .section p {
+            color: #666;
+            line-height: 1.8;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .skill {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .skill:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border: 2px solid #667eea;
+        }
+
+        .project-preview {
+            height: 200px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+        }
+
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .project-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .project-status {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .cert-item {
+            background: linear-gradient(135deg, #f8f9ff, #e8ecff);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border-left: 4px solid #667eea;
+        }
+
+        .contact {
+            text-align: center;
+            margin-top: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .contact h2 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .contact-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 70%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            top: 30%;
+            right: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            position: relative;
+            background: white;
+            margin: 5% auto;
+            padding: 0;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 20px;
+            overflow: hidden;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .modal-body {
+            padding: 40px;
+        }
+
+        .project-detail-preview {
+            height: 300px;
+            background: linear-gradient(135deg, #f8f9ff, #e8ecff);
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            border: 2px dashed #667eea;
+        }
+
+        .project-detail-preview .icon {
+            width: 80px;
+            height: 80px;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .sections {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .modal-content {
+                margin: 10% auto;
+                width: 95%;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+
+             .project-screenshot {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .project-screenshot .screenshot-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-width: 700px;
+            margin: 20px auto;
+        }
+
+        .project-screenshot .fake-phone {
+            width: 100%;
+            max-width: 300px;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+            border: 6px solid #333;
+            margin: 0 auto;
+        }
+
+        /* ===================
+           사유의 여정 스타일
+        =================== */
+        .project-screenshot .mindjourney-screen {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 500px;
+        }
+
+        .project-screenshot .mindjourney-header {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .project-screenshot .mindjourney-title {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .project-screenshot .mindjourney-subtitle {
+            color: rgba(255,255,255,0.8);
+            font-size: 12px;
+        }
+
+        .project-screenshot .analysis-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 18px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .project-screenshot .analysis-title {
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .project-screenshot .message-box {
+            background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
+            border-radius: 12px;
+            padding: 15px;
+            border-left: 4px solid #4CAF50;
+            margin-bottom: 15px;
+        }
+
+        .project-screenshot .message-text {
+            color: #2e7d32;
+            font-size: 12px;
+            line-height: 1.5;
+            font-style: italic;
+        }
+
+        .project-screenshot .insights-list {
+            margin-top: 10px;
+        }
+
+        .project-screenshot .insight-item {
+            background: #f8f9ff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            font-size: 11px;
+            color: #555;
+            border-left: 3px solid #667eea;
+        }
+
+        .project-screenshot .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .project-screenshot .stat-item {
+            background: white;
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .project-screenshot .stat-number {
+            font-size: 16px;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .project-screenshot .stat-label {
+            font-size: 10px;
+            color: #666;
+        }
+
+        /* 태그 화면 스타일 */
+        .project-screenshot .tags-screen {
+            background: #f8fafb;
+            padding: 20px;
+            min-height: 500px;
+        }
+
+        .project-screenshot .tags-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin: -20px -20px 20px -20px;
+        }
+
+        .project-screenshot .tags-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .project-screenshot .tags-section {
+            background: white;
+            border-radius: 15px;
+            padding: 18px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+
+        .project-screenshot .tags-category {
+            margin-bottom: 15px;
+        }
+
+        .project-screenshot .category-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .project-screenshot .tags-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .project-screenshot .tag {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 10px;
+            font-weight: 500;
+            color: white;
+            position: relative;
+        }
+
+        .project-screenshot .tag.emotion-1 { background: linear-gradient(135deg, #ff6b6b, #ee5a52); }
+        .project-screenshot .tag.emotion-2 { background: linear-gradient(135deg, #4ecdc4, #44a08d); }
+        .project-screenshot .tag.emotion-3 { background: linear-gradient(135deg, #45b7d1, #96c93d); }
+
+        .project-screenshot .tag.interest-1 { background: linear-gradient(135deg, #f9ca24, #f0932b); }
+        .project-screenshot .tag.interest-2 { background: linear-gradient(135deg, #eb4d4b, #6c5ce7); }
+        .project-screenshot .tag.interest-3 { background: linear-gradient(135deg, #a55eea, #26de81); }
+
+        .project-screenshot .tag-count {
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            margin-left: 5px;
+        }
+
+        .project-screenshot .bottom-text {
+            text-align: center;
+            color: #667eea;
+            font-size: 10px;
+            margin-top: 15px;
+            font-style: italic;
+        }
+
+        /* ===================
+           오비터리 스타일
+        =================== */
+        .project-screenshot .orbitary-screen {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            padding: 20px;
+            min-height: 500px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-screenshot .orbitary-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 25px;
+        }
+
+        .project-screenshot .orbitary-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .project-screenshot .orbitary-subtitle {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .project-screenshot .universe-container {
+            background: radial-gradient(circle at 50% 50%, rgba(102, 126, 234, 0.1), transparent);
+            border-radius: 15px;
+            padding: 20px;
+            min-height: 200px;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .project-screenshot .star {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
+        }
+
+        .project-screenshot .star:nth-child(1) { top: 20%; left: 30%; animation-delay: 0s; }
+        .project-screenshot .star:nth-child(2) { top: 40%; right: 25%; animation-delay: 0.5s; }
+        .project-screenshot .star:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 1s; }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .project-screenshot .constellation {
+            position: absolute;
+            color: #667eea;
+            font-size: 10px;
+            background: rgba(255,255,255,0.1);
+            padding: 4px 8px;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+        }
+
+        .project-screenshot .constellation:nth-child(4) { top: 25%; left: 35%; }
+        .project-screenshot .constellation:nth-child(5) { top: 45%; right: 30%; }
+        .project-screenshot .constellation:nth-child(6) { bottom: 35%; left: 25%; }
+
+        .project-screenshot .orbitary-stats {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 15px;
+            margin-top: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .project-screenshot .orbitary-stats-title {
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .project-screenshot .orbitary-stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .project-screenshot .orbitary-stat {
+            text-align: center;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .project-screenshot .orbitary-stat-number {
+            font-size: 14px;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .project-screenshot .orbitary-stat-label {
+            font-size: 9px;
+            margin-top: 2px;
+        }
+
+        /* 기타 프로젝트들도 필요하면 추가... */
+
+        @media (max-width: 768px) {
+            .project-screenshot .screenshot-container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .project-screenshot .fake-phone {
+                max-width: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>AI와 함께하는 자기 발견과 치유</h1>
+            <p class="tagline">🧘‍♂️ 내면을 탐구하는 개발자</p>
+            <p class="subtitle">
+                사람들이 진정한 자신과 연결될 수 있는 길을<br>
+                AI로 만들어 갑니다.           </p>
+        </div>
+
+        <!-- Vision Section -->
+        <div class="section-header">
+            <h2>🌟 나만의 비전</h2>
+            <p>AI와 디지털 기술이 자기 발견과 내면 힐링의 도구가 될 수 있다고 믿습니다</p>
+        </div>
+
+        <div class="sections">
+            <div class="section">
+                <h3>
+                    <span class="icon">🤖</span>
+                    AI 기반 자기 발견
+                </h3>
+                <p>
+                    AI를 단순한 생산성 도구가 아닌, 자기 자신을 깊이 이해하고 발견하는 도구로 활용하고자 합니다. 
+                    개인의 패턴, 감정, 생각을 분석하여 숨겨진 내면의 모습을 발견하고 
+                    성장의 방향을 제시하는 AI 동반자를 만들어가고 있습니다.
+                </p>
+            </div>
+
+            <div class="section">
+                <h3>
+                    <span class="icon">💎</span>
+                    디지털 셀프 힐링
+                </h3>
+                <p>
+                    힐링과 치유를 디지털 공간에서 경험할 수 있는 새로운 방법들을 탐구합니다. 
+                    명상, 요가, 에너지 힐링 등의 오프라인 경험을 온라인으로 확장하여 
+                    언제 어디서나 자신을 돌볼 수 있는 도구들을 개발하고 있습니다.
+                </p>
+            </div>
+
+            <div class="section">
+                <h3>
+                    <span class="icon">🔗</span>
+                    진정한 연결의 복원
+                </h3>
+                <p>
+                    표면적인 소셜 네트워킹이 아닌, 영혼 수준에서의 진정한 만남이 가능한 
+                    플랫폼을 만들고자 합니다. 취향과 가치관을 기반으로 한 깊은 연결을 통해 
+                    서로의 성장을 도울 수 있는 공간을 꿈꿉니다.
+                </p>
+            </div>
+
+            <div class="section">
+                <h3>
+                    <span class="icon">⚖️</span>
+                    기술과 영성의 균형
+                </h3>
+                <p>
+                    개발자로서의 논리적 사고와 영성 탐구자로서의 직관적 통찰을 조화롭게 
+                    활용합니다. 기술적 전문성과 영적 지혜를 결합하여 
+                    사용자의 내면 성장에 기여하는 의미 있는 도구들을 만들어갑니다.
+                </p>
+            </div>
+        </div>
+
+        <!-- Skills & Credentials Section -->
+        <div class="section-header">
+            <h2>🛠️ 기술적 역량</h2>
+            <p>기술적 전문성과 다양한 관점을 바탕으로 의미 있는 솔루션을 만들어갑니다</p>
+        </div>
+
+        <div class="sections">
+            <div class="section">
+                <h3>
+                    <span class="icon">💡</span>
+                    핵심 기술
+                </h3>
+                <div class="skills">
+                    <span class="skill">AI/ML Integration</span>
+                    <span class="skill">Data Science</span>
+                    <span class="skill">Full-Stack Development</span>
+                    <span class="skill">Mobile App Development</span>
+                    <span class="skill">Developer Experience</span>
+                    <span class="skill">Community Building</span>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>
+                    <span class="icon">🌍</span>
+                    글로벌 소통
+                </h3>
+                <p>다양한 문화와 언어를 통해 더 넓은 관점에서 사용자를 이해합니다.</p>
+                <div class="skills">
+                    <span class="skill">🇺🇸 English (고급)</span>
+                    <span class="skill">🇪🇸 Español (고급)</span>
+                    <span class="skill">🇨🇳 中文 (중급)</span>
+                    <span class="skill">🇯🇵 日本語 (중급)</span>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>
+                    <span class="icon">📜</span>
+                    전문 자격
+                </h3>
+                <div class="cert-grid">
+                    <div class="cert-item">
+                        <strong>빅데이터분석기사</strong><br>
+                        <small>국가기술자격</small>
+                    </div>
+                    <div class="cert-item">
+                        <strong>ADsP</strong><br>
+                        <small>데이터분석준전문가</small>
+                    </div>
+                    <div class="cert-item">
+                        <strong>CPPG</strong><br>
+                        <small>개인정보관리사</small>
+                    </div>
+                    <div class="cert-item">
+                        <strong>Data Science Lv.2</strong><br>
+                        <small>기업 내부 인증</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>
+                    <span class="icon">🏢</span>
+                    전문 경험
+                </h3>
+                <p>삼성전자에서 13년간 쌓은 기술적 전문성과 사람을 이해하는 능력</p>
+                <div class="skills">
+                    <span class="skill">Smart TV Ecosystem</span>
+                    <span class="skill">Developer Relations</span>
+                    <span class="skill">AI Culture Innovation</span>
+                    <span class="skill">System Management</span>
+                    <span class="skill">Global Community</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Section -->
+        <div class="section-header">
+            <h2>🚀 사이드 프로젝트</h2>
+            <p>진정한 자기 발견을 위한 의미 있는 도구들을 개발하고 있습니다</p>
+        </div>
+
+   <div class="project-grid">
+            <div class="project-card" onclick="openProjectModal('orbitary')">
+                <div class="project-preview">
+                    <span>🌌</span>
+                </div>
+                <div class="project-content">
+                    <div class="project-title">오비터리</div>
+                    <div class="project-description">
+                        나다움을 발견하고 진정한 연결을 만드는 개인 우주
+                    </div>
+                    <span class="project-status">기능 정의 완료</span>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openProjectModal('mindjourney')">
+                <div class="project-preview">
+                    <span>🧠</span>
+                </div>
+                <div class="project-content">
+                    <div class="project-title">사유의 여정</div>
+                    <div class="project-description">
+                        일상의 파편을 AI가 정리하여 깊은 자기 이해로 이끄는 성찰 도구
+                    </div>
+                    <span class="project-status live">서비스 중 (PC)</span>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openProjectModal('dreamscape')">
+                <div class="project-preview">
+                    <span>🌙</span>
+                </div>
+                <div class="project-content">
+                    <div class="project-title">꿈의 탐색</div>
+                    <div class="project-description">
+                        융 심리학과 현대 신경과학을 결합한 무의식 탐구 앱
+                    </div>
+                    <span class="project-status">기획 완료</span>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openProjectModal('pureaware')">
+                <div class="project-preview">
+                    <span>🔍</span>
+                </div>
+                <div class="project-content">
+                    <div class="project-title">PureAware</div>
+                    <div class="project-description">
+                        의식적 소비를 위한 스마트 성분 분석기
+                    </div>
+                    <span class="project-status">프로토타입 완성</span>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openProjectModal('salt')">
+                <div class="project-preview">
+                    <span>🧂</span>
+                </div>
+                <div class="project-content">
+                    <div class="project-title">소금</div>
+                    <div class="project-description">
+                        삶을 풍미롭게 하는 소중한 지식 금고
+                    </div>
+                    <span class="project-status">V2 계획 중</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Spiritual Journey Section -->
+        <div class="section-header">
+            <h2>🧘 영성 탐구 여정</h2>
+            <p>기술과 영성의 통합적 접근을 통한 전인적 성장</p>
+        </div>
+
+        <div class="sections">
+            <div class="section">
+                <h3>
+                    <span class="icon">🎓</span>
+                    학업
+                </h3>
+                <h4>동국대학교 불교대학원</h4>
+                <p>명상심리상담학과 재학중</p>
+                <p>현대 심리학과 불교 명상의 융합을 통한 치유와 성장에 대해 깊이 연구하고 있습니다.</p>
+            </div>
+
+            <div class="section">
+                <h3>
+                    <span class="icon">🧘</span>
+                    요가 & 명상
+                </h3>
+                <h4>리본요가 국제지도사 RYT 200</h4>
+                <p>몸과 마음의 조화를 통한 전인적 웰빙을 추구합니다.</p>
+                
+                <h4>싱잉볼 메디테라피스트</h4>
+                <div class="skills">
+                    <span class="skill">2급 수료</span>
+                    <span class="skill">1급 수료</span>
+                    <span class="skill">그룹 세션</span>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>
+                    <span class="icon">💎</span>
+                    에너지 힐링
+                </h3>
+                <h4>크리스탈 힐러 밸런서</h4>
+                <p>크리스탈의 에너지를 활용한 치유와 균형 회복</p>
+                
+                <h4>우스이/홀리파이어® I&II</h4>
+                <p>전통적인 레이키와 현대적 에너지 치유법의 융합</p>
+            </div>
+
+            <div class="section">
+                <h3>
+                    <span class="icon">🌱</span>
+                    통합적 접근
+                </h3>
+                <p>
+                    기술과 영성, 현대과학과 지혜의 만남을 통해 
+                    사람들이 자신의 내면을 탐구하고 진정한 자아를 발견할 수 있도록 
+                    돕는 것이 저의 사명입니다.
+                </p>
+                <p>
+                    개발자로서의 논리적 사고와 영성 탐구자로서의 직관적 통찰을 
+                    균형있게 활용하여, 기술이 인간의 영적 성장에 기여할 수 있는 
+                    새로운 길을 모색하고 있습니다.
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+
+        <!-- Contact Section -->
+        <div class="contact">
+            <h2>함께 성장해요</h2>
+            <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 30px;">
+                의미 있는 프로젝트나 깊은 대화를 나누고 싶으시면 언제든 연락주세요
+            </p>
+            <div class="contact-links">
+                <a href="mailto:your.email@samsung.com" class="contact-link">
+                    📧 이메일
+                </a>
+                <a href="https://github.com/yourusername" class="contact-link">
+                    🐙 GitHub
+                </a>
+                <a href="https://linkedin.com/in/yourusername" class="contact-link">
+                    💼 LinkedIn
+                </a>
+                <a href="https://blog.example.com" class="contact-link">
+                    ✍️ 블로그
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 프로젝트 상세 모달 -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeProjectModal()">&times;</button>
+                <h2 id="modalTitle">프로젝트 상세</h2>
+                <p id="modalSubtitle">진정한 자아 발견을 위한 여정</p>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- 동적으로 채워질 내용 -->
+            </div>
+        </div>
+    </div>
+
+     <script>
+        function openProjectModal(projectId) {
+            const modal = document.getElementById('projectModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalSubtitle = document.getElementById('modalSubtitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            const projects = {
+    orbitary: {
+        title: '오비터리',
+        subtitle: '나다움을 발견하고 진정한 연결을 만드는 개인 우주',
+        icon: '🌌',
+        description: '취향과 가치관을 바탕으로 자동으로 생성되는 개인 우주에서 진정한 연결을 만드는 소셜 플랫폼입니다.',
+        philosophy: '피상적인 연결을 넘어서 영혼 수준에서의 진정한 만남이 이루어지는 공간을 만들고자 합니다. 개인의 "나다움"을 별자리로 시각화하고, 비슷한 가치관을 가진 사람들과의 소규모 커뮤니티를 통해 깊이 있는 소통을 나눕니다.',
+        hasScreenshots: true,
+        screenshots: `
+            <div class="fake-phone">
+                <div class="orbitary-screen">
+                    <div class="orbitary-header">
+                        <div class="orbitary-title">🌌 나의 우주</div>
+                        <div class="orbitary-subtitle">취향 기반 별자리가 자동 생성됩니다</div>
+                    </div>
+                    <div class="universe-container">
+                        <div class="star"></div>
+                        <div class="star"></div>
+                        <div class="star"></div>
+                        <div class="constellation">🎵 음악</div>
+                        <div class="constellation">📚 독서</div>
+                        <div class="constellation">☕ 카페</div>
+                    </div>
+                    <div class="orbitary-stats">
+                        <div class="orbitary-stats-title">✨ 우주 현황</div>
+                        <div class="orbitary-stats-grid">
+                            <div class="orbitary-stat">
+                                <div class="orbitary-stat-number">12</div>
+                                <div class="orbitary-stat-label">별자리</div>
+                            </div>
+                            <div class="orbitary-stat">
+                                <div class="orbitary-stat-number">156</div>
+                                <div class="orbitary-stat-label">별</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="fake-phone">
+                <div class="orbitary-screen">
+                    <div class="orbitary-header">
+                        <div class="orbitary-title">🌠 은하 커뮤니티</div>
+                        <div class="orbitary-subtitle">비슷한 취향의 사람들과 만나보세요</div>
+                    </div>
+                    <div class="orbitary-stats" style="margin-bottom: 15px;">
+                        <div class="orbitary-stats-title">🎭 재즈 애호가들</div>
+                        <div style="color: rgba(255,255,255,0.8); font-size: 10px; margin-top: 8px;">
+                            15명의 멤버가 재즈 음악에 대한 깊은 이야기를 나누고 있습니다
+                        </div>
+                    </div>
+                    <div class="orbitary-stats" style="margin-bottom: 15px;">
+                        <div class="orbitary-stats-title">📖 철학 탐구단</div>
+                        <div style="color: rgba(255,255,255,0.8); font-size: 10px; margin-top: 8px;">
+                            8명의 멤버가 철학과 사유에 대해 토론하고 있습니다
+                        </div>
+                    </div>
+                    <div class="orbitary-stats">
+                        <div class="orbitary-stats-title">☕ 카페 순례단</div>
+                        <div style="color: rgba(255,255,255,0.8); font-size: 10px; margin-top: 8px;">
+                            22명의 멤버가 특별한 카페들을 공유하고 있습니다
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `,
+        features: [
+            '🌟 AI 기반 자동 별자리 생성 - 일기 작성만으로 취향 발견',
+            '✨ 별의 진화 시스템 - 반복 패턴에 따른 동적 성장',
+            '🌠 취향 기반 자동 매칭 - 5-50명 소규모 은하 커뮤니티',
+            '🎨 마이 컬렉션 - 진정성 있는 큐레이션과 수익 연동',
+            '📊 우주 비교 분석 - 다른 사람과의 취향 유사도 측정'
+        ],
+        tech: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'OpenAI API', 'Canvas/Three.js'],
+        vision: '"나다움을 발견하고, 진정한 연결을 만들어가는 우주"라는 비전으로 사용자들이 자신만의 취향 우주를 구축하며 운명적인 만남을 경험할 수 있도록 합니다.',
+        githubUrl: '#'
+    },
+    
+    mindjourney: {
+        title: '사유의 여정',
+        subtitle: '일상의 파편을 AI가 정리하여 깊은 자기 이해로 이끄는 성찰 도구',
+        icon: '🧠',
+        description: '하나의 입력창에 자유롭게 쓴 메모를 AI가 분석하여 관심사는 카테고리별로, 내면 성찰은 개인 분석으로 자동 분류하는 지능형 성찰 도구입니다.',
+        isLive: true,
+        liveUrl: '#', // 실제 서비스 URL로 교체
+        philosophy: '개인의 일상 데이터를 통한 깊이 있는 자기 탐구를 지원합니다. 단순한 메모앱을 넘어서 "사유의 여정"으로, 내면 탐구와 자기 발견에 집중한 철학적 접근을 취합니다.',
+        hasScreenshots: true,
+        screenshots: `
+            <div class="fake-phone">
+                <div class="mindjourney-screen">
+                    <div class="mindjourney-header">
+                        <div class="mindjourney-title">🧠 사유의 여정</div>
+                        <div class="mindjourney-subtitle">일상의 파편들을 AI가 정리하여 깊은 이해로</div>
+                    </div>
+                    <div class="analysis-card">
+                        <div class="analysis-title">🔍 나의 분석</div>
+                        <div class="message-box">
+                            <div class="message-text">
+                                🌟 새로운 내면의 메시지<br><br>
+                                당신이 작성한 메모는 일부의 인정과 성과에 대한 높은 의존성을 보여줍니다. 당신은 이미 내면에서 변화와 창조의 힘을 발견하기 되어 있습니다.
+                            </div>
+                        </div>
+                        <div class="insights-list">
+                            <div class="insight-item">💡 성장 통찰: 자신의 환하는 것을 명확히 정의하고...</div>
+                            <div class="insight-item">• 자신을 효험한 장승하고, 그 목표를 향해 작지만...</div>
+                        </div>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number">21개</div>
+                            <div class="stat-label">전체 메모</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">24개</div>
+                            <div class="stat-label">관심사</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="fake-phone">
+                <div class="tags-screen">
+                    <div class="tags-header">
+                        <div class="tags-title">🏷️ 특성 태그</div>
+                    </div>
+                    <div class="tags-section">
+                        <div class="tags-category">
+                            <div class="category-title">감정적 특성</div>
+                            <div class="tags-row">
+                                <span class="tag emotion-1">창의적 <span class="tag-count">5</span></span>
+                                <span class="tag emotion-2">감정적 <span class="tag-count">5</span></span>
+                                <span class="tag emotion-3">완벽주의 <span class="tag-count">4</span></span>
+                            </div>
+                        </div>
+                        <div class="tags-category">
+                            <div class="category-title">관심사 영역</div>
+                            <div class="tags-row">
+                                <span class="tag interest-1">분석적 <span class="tag-count">3</span></span>
+                                <span class="tag interest-2">내향적 <span class="tag-count">3</span></span>
+                                <span class="tag interest-3">내성적 <span class="tag-count">2</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bottom-text">💡 크기 클수록 더 강한 특성을 나타냅니다</div>
+                </div>
+            </div>
+        `,
+        features: [
+            '✅ 현재 PC 버전 서비스 중 - 실제 사용자 피드백 반영',
+            '📝 5가지 카테고리 자동 분류 - 사유/학습/아이디어/일기/수집',
+            '🤖 스마트 AI 분류 시스템 - 1개 입력 → 2개 출력 (취향/내면분석)',
+            '✅ 2단계 할일 시스템 - 명확한 할일 + AI 추천',
+            '🌟 내면으로부터의 메시지 - Bashar 스타일 영적 조언'
+        ],
+        tech: ['Next.js 14', 'TypeScript', 'Supabase', 'OpenAI API', 'TailwindCSS'],
+        vision: '"일상의 파편들을 AI가 정리하여 나에 대한 깊은 이해와 성장을 돕는 개인 여정"을 통해 사용자의 내면 탐구를 지원합니다.',
+        githubUrl: '#'
+    },
+    
+    dreamscape: {
+        title: '꿈의 탐색',
+        subtitle: '융 심리학과 현대 신경과학을 결합한 무의식 탐구',
+        icon: '🌙',
+        description: '꿈 일기를 통해 융의 원형 이론과 현대 신경과학을 결합하여 무의식의 메시지를 탐색하고 개인적 성장을 돕는 앱입니다.',
+        philosophy: '꿈을 통해 무의식과 소통하며 자신의 깊은 내면을 이해할 수 있는 다리 역할을 하고자 합니다. 기술적 분석과 영적 통찰을 결합하여 현대인의 자기 발견을 돕습니다.',
+        hasScreenshots: true,
+        screenshots: `
+            <div class="fake-phone">
+                <div class="dream-screen">
+                    <div class="dream-header">
+                        <div class="dream-title">🌙 꿈 일기</div>
+                        <div class="dream-date">2024년 3월 15일</div>
+                    </div>
+                    <div class="dream-card">
+                        <div class="dream-card-header">
+                            <div class="dream-type">🏫 학교 꿈</div>
+                            <div class="dream-emotion emotion-anxious">불안</div>
+                        </div>
+                        <div class="dream-content">
+                            오래된 학교 건물에서 시험을 보는데 문제를 전혀 읽을 수 없었습니다. 계단을 올라가는데 끝이 없어서...
+                        </div>
+                        <div class="dream-symbols">
+                            <span class="symbol-tag">학교</span>
+                            <span class="symbol-tag">시험</span>
+                            <span class="symbol-tag">계단</span>
+                        </div>
+                    </div>
+                    <div class="dream-card">
+                        <div class="dream-card-header">
+                            <div class="dream-type">🌊 물 꿈</div>
+                            <div class="dream-emotion emotion-peaceful">평온</div>
+                        </div>
+                        <div class="dream-content">
+                            맑은 호수에서 수영하는 꿈. 물이 너무 따뜻하고 편안했습니다.
+                        </div>
+                        <div class="dream-symbols">
+                            <span class="symbol-tag">물</span>
+                            <span class="symbol-tag">수영</span>
+                        </div>
+                    </div>
+                    <div class="analysis-section">
+                        <div class="analysis-title">🧠 융 분석</div>
+                        <div class="archetype-item">그림자: 시험 불안은 숨겨진 두려움을 나타냄</div>
+                        <div class="archetype-item">아니마: 물은 무의식과 감정을 상징</div>
+                    </div>
+                </div>
+            </div>
+            <div class="fake-phone">
+                <div class="dream-screen">
+                    <div class="dream-header">
+                        <div class="dream-title">👥 인물 패턴</div>
+                        <div class="dream-date">최근 3개월 분석</div>
+                    </div>
+                    <div class="dream-card">
+                        <div class="dream-card-header">
+                            <div class="dream-type">엄마 (15회)</div>
+                            <div class="dream-emotion emotion-peaceful">안정감</div>
+                        </div>
+                        <div class="dream-content">
+                            스트레스 받을 때 주로 등장. 집, 요리, 대화 장면이 많음
+                        </div>
+                    </div>
+                    <div class="dream-card">
+                        <div class="dream-card-header">
+                            <div class="dream-type">고등학교 친구 (8회)</div>
+                            <div class="dream-emotion emotion-anxious">그리움</div>
+                        </div>
+                        <div class="dream-content">
+                            과거 회상과 관련된 꿈에서 자주 등장
+                        </div>
+                    </div>
+                    <div class="analysis-section">
+                        <div class="analysis-title">📊 패턴 분석</div>
+                        <div class="archetype-item">3월: 엄마 꿈 급증 (스트레스 증가 시기)</div>
+                        <div class="archetype-item">새 환경: 낯선 사람들 등장 빈도 높음</div>
+                    </div>
+                </div>
+            </div>
+        `,
+        features: [
+            '🧠 융의 원형 분석 - 그림자, 아니마/아니무스, 자기(Self)',
+            '👥 꿈 속 인물 패턴 분석 - 자주 나오는 사람들의 의미',
+            '🎭 개인화된 상징 사전 - 반복되는 개인적 상징들',
+            '🌙 자각몽 지원 도구 - 루시드 드리밍 수행 가이드',
+            '📈 감정/패턴 시간 추이 - 무의식 변화 패턴 시각화'
+        ],
+        tech: ['Flutter', 'Firebase', 'Python', 'Jung API', 'Cloud ML'],
+        vision: '융 심리학과 현대 기술의 만남을 통해 사용자가 무의식의 지혜에 접근하고 자기 발견의 여정을 떠날 수 있도록 돕습니다.',
+        githubUrl: '#'
+    },
+    
+    pureaware: {
+        title: 'PureAware',
+        subtitle: '의식적 소비를 위한 스마트 성분 분석기',
+        icon: '🔍',
+        description: '카메라로 제품의 바코드나 성분표를 촬영하면 개인의 건강 프로필과 알레르기 정보에 맞춰 주의 성분을 분석해주는 앱입니다.',
+        philosophy: '복잡한 성분표를 누구나 쉽게 이해하고, 자신에게 맞는 건강한 선택을 할 수 있도록 돕습니다. 의식적인 소비 문화를 만들어가는 것이 목표입니다.',
+        hasScreenshots: true,
+        screenshots: `
+            <div class="fake-phone">
+                <div class="pureaware-screen">
+                    <div class="pureaware-header">
+                        <div class="pureaware-title">🔍 PureAware</div>
+                        <div class="pureaware-subtitle">스마트 성분 체커</div>
+                    </div>
+                    <div class="scan-result">
+                        <div class="product-info">
+                            <div>
+                                <div class="product-name">오리온 초코파이</div>
+                                <div style="font-size: 12px; color: #666;">과자류 • 제과</div>
+                            </div>
+                            <div class="safety-score score-warning">68</div>
+                        </div>
+                        <div style="background: #fff3e0; padding: 10px; border-radius: 8px; margin-bottom: 15px;">
+                            <div style="font-size: 12px; color: #e65100; font-weight: 600;">⚠️ 당뇨 환자 주의</div>
+                            <div style="font-size: 11px; color: #bf360c; margin-top: 2px;">일부 첨가물 포함</div>
+                        </div>
+                        <div class="ingredients-list">
+                            <div class="ingredient-item ingredient-danger">
+                                <div class="ingredient-icon">⚠️</div>
+                                <div class="ingredient-text">
+                                    <div class="ingredient-name">액상과당</div>
+                                    <div class="ingredient-desc">당뇨 환자 주의 • 혈당 급상승</div>
+                                </div>
+                            </div>
+                            <div class="ingredient-item ingredient-warning">
+                                <div class="ingredient-icon">⚡</div>
+                                <div class="ingredient-text">
+                                    <div class="ingredient-name">타르색소</div>
+                                    <div class="ingredient-desc">인공첨가물 • 과민반응 가능</div>
+                                </div>
+                            </div>
+                            <div class="ingredient-item ingredient-safe">
+                                <div class="ingredient-icon">✅</div>
+                                <div class="ingredient-text">
+                                    <div class="ingredient-name">밀가루, 설탕</div>
+                                    <div class="ingredient-desc">일반적으로 안전한 기본 원료</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="fake-phone">
+                <div class="pureaware-screen">
+                    <div class="pureaware-header">
+                        <div class="pureaware-title">🏠 우리집 안전도</div>
+                        <div class="pureaware-subtitle">보유 제품 현황</div>
+                    </div>
+                    <div class="scan-result">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
+                            <div style="text-align: center; background: #f0f8ff; padding: 15px; border-radius: 10px;">
+                                <div style="font-size: 20px; font-weight: 700; color: #667eea;">23</div>
+                                <div style="font-size: 11px; color: #666;">전체 제품</div>
+                            </div>
+                            <div style="text-align: center; background: #f0f8ff; padding: 15px; border-radius: 10px;">
+                                <div style="font-size: 20px; font-weight: 700; color: #667eea;">78</div>
+                                <div style="font-size: 11px; color: #666;">평균 점수</div>
+                            </div>
+                        </div>
+                        <div style="background: #fff; border-radius: 12px; padding: 15px; margin-bottom: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                            <div style="font-size: 14px; font-weight: 600; color: #333; margin-bottom: 10px;">🍽️ 식품 (12개)</div>
+                            <div style="font-size: 11px; color: #666;">냉장고, 냉동고, 상온보관</div>
+                        </div>
+                        <div style="background: #ffebee; border-radius: 12px; padding: 15px; border-left: 4px solid #F44336;">
+                            <div style="font-size: 14px; font-weight: 600; color: #c62828; margin-bottom: 8px;">⚠️ 주의 필요 제품</div>
+                            <div style="font-size: 12px; color: #d32f2f;">초코파이 - 당뇨 환자 주의</div>
+                            <div style="font-size: 12px; color: #d32f2f;">샴푸 A - 민감성 피부 주의</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `,
+        features: [
+            '📸 실시간 바코드/OCR 인식 - 즉시 성분 정보 추출',
+            '⚠️ 개인화된 위험 알림 - 알레르기/건강 상태 기반',
+            '🏆 안전도 점수 시스템 - 직관적인 0-100점 평가',
+            '📊 성분별 상세 분석 - 위험도별 색상 구분',
+            '🏠 우리집 관리 기능 - 보유 제품 안전도 현황'
+        ],
+        tech: ['React Native', 'TensorFlow Lite', 'OCR API', 'AWS', 'PostgreSQL'],
+        vision: '의식적이고 건강한 소비 문화를 통해 개인의 웰빙과 사회 전체의 건강을 추구합니다.',
+        githubUrl: '#'
+    },
+    
+    salt: {
+        title: '소금',
+        subtitle: '삶을 풍미롭게 하는 소중한 지식 금고',
+        icon: '🧂',
+        description: '개인이 관심 있는 유튜브 컨텐츠를 자동으로 수집하고 번역하여 검색 가능한 개인화된 지식 창고를 만드는 시스템입니다.',
+        philosophy: '지식은 삶의 소금과 같습니다. 생명을 유지하는 필수 요소이면서 삶을 풍미롭게 만드는 역할을 합니다. 개인의 학습 여정을 지원하는 지혜로운 동반자가 되고자 합니다.',
+        hasScreenshots: true,
+        screenshots: `
+            <div class="fake-phone">
+                <div class="salt-screen">
+                    <div class="salt-header">
+                        <div class="salt-title">🧂 소금</div>
+                        <div class="salt-subtitle">소중한 지식 금고</div>
+                    </div>
+                    <div class="knowledge-card">
+                        <div class="video-thumbnail">
+                            <div class="play-button">▶</div>
+                        </div>
+                        <div class="video-title">AI 시대의 창의성과 인간의 역할</div>
+                        <div class="video-summary">
+                            AI가 발전하는 시대에 인간만이 할 수 있는 창의적 작업과 영적 탐구에 대한 깊은 통찰...
+                        </div>
+                        <div class="video-tags">
+                            <span class="tag">AI</span>
+                            <span class="tag">창의성</span>
+                            <span class="tag">철학</span>
+                        </div>
+                    </div>
+                    <div class="knowledge-card">
+                        <div class="video-thumbnail">
+                            <div class="play-button">▶</div>
+                        </div>
+                        <div class="video-title">명상과 코딩: 개발자의 마음챙김</div>
+                        <div class="video-summary">
+                            프로그래밍과 명상의 공통점, 집중력 향상을 위한 실용적 방법들...
+                        </div>
+                        <div class="video-tags">
+                            <span class="tag">명상</span>
+                            <span class="tag">개발</span>
+                            <span class="tag">마음챙김</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="fake-phone">
+                <div class="salt-screen">
+                    <div class="salt-header">
+                        <div class="salt-title">📚 학습 플레이리스트</div>
+                        <div class="salt-subtitle">연속 학습 경로</div>
+                    </div>
+                    <div class="playlist-section">
+                        <div class="playlist-title">🧘 영성과 기술 시리즈</div>
+                        <div class="playlist-items">
+                            <div class="playlist-item">
+                                <div class="playlist-thumbnail">1</div>
+                                <div class="playlist-info">
+                                    <div class="playlist-item-title">AI와 의식의 본질</div>
+                                    <div class="playlist-duration">12분</div>
+                                </div>
+                            </div>
+                            <div class="playlist-item">
+                                <div class="playlist-thumbnail">2</div>
+                                <div class="playlist-info">
+                                    <div class="playlist-item-title">디지털 명상의 가능성</div>
+                                    <div class="playlist-duration">8분</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="background: white; border-radius: 15px; padding: 15px; text-align: center; box-shadow: 0 2px 15px rgba(0,0,0,0.08);">
+                        <div style="font-size: 14px; font-weight: 600; color: #333; margin-bottom: 8px;">🎵 TTS 재생 중</div>
+                        <div style="font-size: 12px; color: #666; margin-bottom: 10px;">"AI 시대의 창의성과 인간의 역할"</div>
+                        <div style="background: #f0f2f5; height: 4px; border-radius: 2px; margin-bottom: 8px;">
+                            <div style="background: linear-gradient(135deg, #667eea, #764ba2); height: 4px; width: 40%; border-radius: 2px;"></div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 10px; color: #666;">
+                            <span>4:32</span>
+                            <span>11:28</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `,
+        features: [
+            '🎵 TTS 오디오 기능 - 텍스트 읽어주기 + 백그라운드 재생',
+            '📚 스마트 플레이리스트 - 토픽별 연속 학습 경로',
+            '🤖 AI 요약 및 추천 - GPT 기반 핵심 내용 정리',
+            '💖 소셜 기능 - 좋아요, 북마크, 플레이리스트 공유',
+            '📊 학습 패턴 분석 - 개인 맞춤 인사이트 제공'
+        ],
+        tech: ['Next.js', 'Python', 'YouTube API', 'Google TTS', 'Vector DB'],
+        vision: '"소중한 지식 금고"라는 이름처럼, 개인의 지적 성장과 깊이 있는 학습을 통해 삶을 더욱 풍요롭게 만들어갑니다.',
+        githubUrl: '#'
+    }
+};
+            
+            const project = projects[projectId];
+            if (!project) return;
+            
+            modalTitle.textContent = project.title;
+            modalSubtitle.textContent = project.subtitle;
+            
+            modalBody.innerHTML = `
+                <!-- 🎨 새로 추가: 스크린샷 섹션 -->
+    ${project.hasScreenshots ? `
+        <div style="margin-bottom: 30px;">
+            <h3 style="color: #333; margin-bottom: 15px;">📱 실제 서비스 화면</h3>
+            <div class="project-screenshot">
+                <div class="screenshot-container">
+                    ${project.screenshots}
+                </div>
+            </div>
+        </div>
+    ` : ''}
+            
+                <div class="project-detail-preview">
+                    <div class="icon">${project.icon}</div>
+                    ${project.isLive ? '<p style="color: #4CAF50; font-weight: 600; margin-top: 10px;">🟢 현재 서비스 중</p>' : '<p style="color: #667eea; font-weight: 600; margin-top: 10px;">개발 진행 중</p>'}
+                </div>
+                
+                ${project.isLive ? '<div class="live-service-banner">✨ 현재 PC 버전으로 서비스 중입니다! 모바일 버전 개발 예정</div>' : ''}
+                
+                <div style="margin-bottom: 30px;">
+                    <h3 style="color: #333; margin-bottom: 15px;">💡 프로젝트 소개</h3>
+                    <p style="color: #666; line-height: 1.8;">${project.description}</p>
+                </div>
+                
+                <div class="philosophy-section">
+                    <h3 style="color: #333; margin-bottom: 15px;">🌟 철학과 비전</h3>
+                    <p style="color: #555; line-height: 1.8; font-style: italic;">${project.philosophy}</p>
+                </div>
+                
+                <div style="margin-bottom: 30px;">
+                    <h3 style="color: #333; margin-bottom: 15px;">⭐ 핵심 기능</h3>
+                    <div class="features-list">
+                        ${project.features.map(feature => `
+                            <div class="feature-item">${feature}</div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 30px;">
+                    <h3 style="color: #333; margin-bottom: 15px;">🛠️ 기술 스택</h3>
+                    <div class="tech-stack">
+                        ${project.tech.map(tech => `
+                            <span class="tech-item">${tech}</span>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div style="background: linear-gradient(135deg, #f8f9ff, #e8ecff); padding: 25px; border-radius: 15px; border-left: 4px solid #667eea; margin-bottom: 25px;">
+                    <h3 style="color: #333; margin-bottom: 15px;">💫 프로젝트 비전</h3>
+                    <p style="color: #555; line-height: 1.8; font-style: italic;">${project.vision}</p>
+                </div>
+                
+                <div class="link-buttons">
+                    ${project.isLive ? `<a href="${project.liveUrl}" target="_blank" class="link-btn primary">🚀 서비스 이용하기</a>` : ''}
+                    <a href="${project.githubUrl}" target="_blank" class="link-btn secondary">🐙 GitHub 보기</a>
+                    ${project.isLive ? '<a href="#" class="link-btn secondary">📱 모바일 버전 알림 받기</a>' : ''}
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+        }
+        
+        function closeProjectModal() {
+            document.getElementById('projectModal').style.display = 'none';
+        }
+        
+        // 모달 외부 클릭 시 닫기
+        window.onclick = function(event) {
+            const modal = document.getElementById('projectModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // 부드러운 스크롤 효과
+        document.addEventListener('DOMContentLoaded', function() {
+            // 페이지 로드 시 애니메이션 효과
+            const projectCards = document.querySelectorAll('.project-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            projectCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = `all 0.6s ease ${index * 0.1}s`;
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
